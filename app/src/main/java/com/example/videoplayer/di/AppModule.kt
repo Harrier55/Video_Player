@@ -17,8 +17,7 @@ object AppModule {
 
         viewModel {
             MainActivityViewModel(
-                videoRepository = get(),
-                dataBase = get()
+                videoRepository = get()
             )
         }
     }
@@ -36,6 +35,5 @@ object AppModule {
             val dataBase = get<ReportDataBase>()
             dataBase.getReportDao()
         }
-
     }
 }

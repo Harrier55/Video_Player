@@ -7,8 +7,7 @@ import com.example.videoplayer.entity.VideoEntity
 import com.example.videoplayer.room.ReportDataBase
 
 class MainActivityViewModel(
-    private val videoRepository: VideoRepository,
-    private val dataBase: ReportDataBase
+    private val videoRepository: VideoRepository
 ) : ViewModel() {
 
     init {
