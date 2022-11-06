@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+
 }
 
 android {
@@ -45,6 +46,9 @@ android {
 
 
 dependencies {
+    //Room
+    implementation 'androidx.room:room-runtime:2.2.5'
+
     // Koin
     implementation 'io.insert-koin:koin-core:3.2.1'
     implementation 'io.insert-koin:koin-android:3.2.1'

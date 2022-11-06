@@ -4,8 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.videoplayer.data.VideoRepository
 import com.example.videoplayer.entity.VideoEntity
+import com.example.videoplayer.room.ReportDataBase
 
-class MainActivityViewModel(private val videoRepository: VideoRepository) : ViewModel() {
+class MainActivityViewModel(
+    private val videoRepository: VideoRepository,
+    private val dataBase: ReportDataBase
+) : ViewModel() {
 
     init {
         videoRepository.mockRepo()
@@ -19,9 +23,9 @@ class MainActivityViewModel(private val videoRepository: VideoRepository) : View
 
     fun startVideo() {
 
-        if (index != listSize-1) {
+        if (index != listSize - 1) {
             index++
-        } else if (index == listSize-1) {
+        } else if (index == listSize - 1) {
             index = 0
         }
         videoContent.postValue(list[index])
