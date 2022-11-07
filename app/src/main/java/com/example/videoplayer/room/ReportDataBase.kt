@@ -3,8 +3,12 @@ package com.example.videoplayer.room
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = arrayOf(ReportEntity::class), version = 1, exportSchema = false)
+@Database(
+    entities = [ReportEntity::class],
+    version = 1,
+    exportSchema = false
+)
 
-abstract class ReportDataBase: RoomDatabase() {
+abstract class ReportDataBase : RoomDatabase() {
     abstract fun getReportDao(): ReportDAO
 }

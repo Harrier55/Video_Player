@@ -37,6 +37,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.videoContent.observe(this) { videoEntity ->
             playerStart(videoEntity)
         }
+
+        viewModel.reportDataBaseList.observe(this){
+            binding.listDBTextView.text = it.toString()
+        }
     }
 
     private fun playerStart(videoEntity: VideoEntity) {
@@ -69,6 +73,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.buttonStop.setOnClickListener {
             mediaPlayer.stop()
+        }
+
+        binding.buttonDB.setOnClickListener {
+            viewModel.readDataBase()
         }
     }
 

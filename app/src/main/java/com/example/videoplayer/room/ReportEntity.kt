@@ -10,5 +10,5 @@ data class ReportEntity(
     val id: Int,
     val id_video:Int,
     val video_name:String,
-    val start_time: Date
+    val start_time: String
 )

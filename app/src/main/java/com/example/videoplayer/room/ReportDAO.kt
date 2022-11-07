@@ -9,9 +9,9 @@ import androidx.room.Query
 interface ReportDAO {
 
     @Query("SELECT * FROM ReportEntity")
-    fun getAll(): List<ReportEntity>
+    suspend fun getAll(): List<ReportEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(entity: ReportEntity)
+    suspend fun insert(entity: ReportEntity)
 
 }

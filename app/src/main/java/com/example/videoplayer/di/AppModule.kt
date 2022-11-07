@@ -2,6 +2,7 @@ package com.example.videoplayer.di
 
 import androidx.room.Room
 import com.example.videoplayer.data.VideoRepository
+import com.example.videoplayer.room.ReportDAO
 import com.example.videoplayer.room.ReportDataBase
 import com.example.videoplayer.ui.MainActivityViewModel
 import org.koin.android.ext.koin.androidContext
@@ -17,7 +18,7 @@ object AppModule {
 
         viewModel {
             MainActivityViewModel(
-                videoRepository = get()
+                videoRepository = get(), reportDAO = get<ReportDAO>()
             )
         }
     }
