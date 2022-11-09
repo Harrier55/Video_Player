@@ -3,6 +3,7 @@ package com.example.videoplayer.ui
 import android.Manifest
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -46,9 +47,11 @@ class MainActivity : AppCompatActivity() {
     private fun playerStart(videoEntity: VideoEntity) {
 
         val videoId = videoEntity.videoIdentifier
+        val part = "content://com.example.videoplayer/video_2.mp4"
 
         try {
-            mediaPlayer = MediaPlayer.create(this, videoId)  // это работает только  с ресурсом
+//            mediaPlayer = MediaPlayer.create(this, videoId)  // это работает только  с ресурсом
+            mediaPlayer = MediaPlayer.create(this, Uri.parse(part))
         } catch (e: IOException) {
             Log.d(TAG, "Error: $e")
         }
@@ -86,7 +89,6 @@ class MainActivity : AppCompatActivity() {
         surfaceViewHolder.addCallback(object : SurfaceHolder.Callback {
 
             override fun surfaceCreated(p0: SurfaceHolder) {
-
                 Log.d(TAG, "surfaceCreated: ")
             }
 
