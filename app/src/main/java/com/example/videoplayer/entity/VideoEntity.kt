@@ -5,6 +5,6 @@ import java.io.File
 
 data class VideoEntity(
     var videoId:Int,
-    var videoIdentifier:Int,
+    var videoIdentifier:String,
     var orderNumber:Int
 )

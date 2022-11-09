@@ -1,10 +1,18 @@
 package com.example.videoplayer.data
 
-import com.example.videoplayer.R
+import android.content.Context
+import android.util.Log
+import com.example.example.VideoData
 import com.example.videoplayer.entity.VideoEntity
 import com.example.videoplayer.entity.VideoImplementation
+import com.google.gson.Gson
+import kotlinx.coroutines.*
 
-class VideoRepository : VideoImplementation {
+private const val FOLDER_PATH_ASSETS = "video"
+private const val NAME_FILE_JSON = "medialist.json"
+
+
+class VideoRepository(private val context: Context) : VideoImplementation {
 
     private val videoList = mutableListOf<VideoEntity>()
 
@@ -12,14 +20,45 @@ class VideoRepository : VideoImplementation {
         videoList.add(videoEntity)
     }
 
-    override fun getListVideo(): List<VideoEntity>{
+    override fun getListVideo(): List<VideoEntity> {
+
+        loadVideoFilesFromAssetsFolder()
         return videoList
     }
 
-    fun mockRepo(){
-        createVideoEntityList(VideoEntity(1, R.raw.video_1,25))
-        createVideoEntityList(VideoEntity(2, R.raw.video_2,25))
-        createVideoEntityList(VideoEntity(3, R.raw.video_3,25))
-        createVideoEntityList(VideoEntity(4, R.raw.video_4,25))
+    override fun loadVideoFilesFromAssetsFolder() {
+        val json = readJson()
+        val packageName = readPackageName()
+        val videoData = Gson().fromJson(json, Array<VideoData>::class.java)
+
+        videoData.forEach {
+            val identifier = it.VideoIdentifier
+            val path = "content://$packageName/$FOLDER_PATH_ASSETS/$identifier"
+            createVideoEntityList(
+                VideoEntity(
+                    videoId = it.VideoId!!,
+                    videoIdentifier = path,
+                    orderNumber = it.OrderNumber!!
+                )
+            )
+        }
     }
+
+    private fun readJson(): String {
+        var json: String? = null
+        try {
+            json = context.assets.open(NAME_FILE_JSON).bufferedReader().use {
+                it.readText()
+            }
+            Log.d("@@@", "readJson: $json")
+        } catch (e: Exception) {
+            Log.d("@@@", "readJson Error: $e")
+        }
+        return json!!
+    }
+
+    private fun readPackageName(): String {
+        return context.packageName
+    }
+
 }

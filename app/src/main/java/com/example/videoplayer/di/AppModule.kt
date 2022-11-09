@@ -14,7 +14,7 @@ private const val DB_NAME = "minitv.db"
 object AppModule {
 
     val mainModule = module {
-        single { VideoRepository() }
+        single { VideoRepository(context = androidContext()) }
 
         viewModel {
             MainActivityViewModel(

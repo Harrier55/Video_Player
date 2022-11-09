@@ -46,11 +46,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun playerStart(videoEntity: VideoEntity) {
 
-        val videoId = videoEntity.videoIdentifier
-        val part = "content://com.example.videoplayer/video_2.mp4"
+        val part = videoEntity.videoIdentifier
 
         try {
-//            mediaPlayer = MediaPlayer.create(this, videoId)  // это работает только  с ресурсом
             mediaPlayer = MediaPlayer.create(this, Uri.parse(part))
         } catch (e: IOException) {
             Log.d(TAG, "Error: $e")
