@@ -1,7 +1,5 @@
 package com.example.videoplayer.ui
 
-import android.os.ParcelFileDescriptor.open
-import android.system.Os.open
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,9 +8,7 @@ import com.example.videoplayer.data.VideoRepository
 import com.example.videoplayer.entity.VideoEntity
 import com.example.videoplayer.room.ReportDAO
 import com.example.videoplayer.room.ReportEntity
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.nio.channels.FileChannel.open
 import java.util.*
 
 class MainActivityViewModel(
@@ -22,7 +18,7 @@ class MainActivityViewModel(
 
     private val list by lazy { videoRepository.getListVideo() }
     private val listSize = list.size
-    private var index = 0
+    private var index = -1
 
     val videoContent = MutableLiveData<VideoEntity>()
     val reportDataBaseList = MutableLiveData<List<ReportEntity>>()

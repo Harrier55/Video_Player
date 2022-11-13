@@ -50,14 +50,13 @@ class MainActivity : AppCompatActivity() {
         val part = videoEntity.videoIdentifier
 
         try {
-            val part1 = "content://com.example.videoplayer/video_8.mp4"
-            mediaPlayer = MediaPlayer.create(this, Uri.parse(part1))
+            mediaPlayer = MediaPlayer.create(this, Uri.parse(part))
         } catch (e: IOException) {
             Log.d(TAG, "playerStart Error: $e")
         }
 
         mediaPlayer.setOnPreparedListener {
-            Log.d(TAG, "Готов:")
+            Log.d(TAG, " PreparedListener Готов:")
             mediaPlayer.setDisplay(surfaceViewHolder)
             mediaPlayer.start()
         }

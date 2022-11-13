@@ -18,8 +18,6 @@ class VideoRepository(private val context: Context) : VideoImplementation {
 
     override fun createVideoEntityList(videoEntity: VideoEntity) {
         videoList.add(videoEntity)
-        Log.d("@@@", "createVideoEntityList: " + videoList.indexOf(videoEntity))
-
     }
 
     override fun getListVideo(): List<VideoEntity> {
@@ -51,7 +49,6 @@ class VideoRepository(private val context: Context) : VideoImplementation {
             json = context.assets.open(NAME_FILE_JSON).bufferedReader().use {
                 it.readText()
             }
-            Log.d("@@@", "VideoRepository readJson: $json")
         } catch (e: Exception) {
             Log.d("@@@", "readJson Error: $e")
         }
