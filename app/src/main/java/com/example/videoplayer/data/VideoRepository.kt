@@ -9,7 +9,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.*
 
 private const val FOLDER_PATH_ASSETS = "video"
-private const val NAME_FILE_JSON = "medialist.json"
+private const val NAME_FILE_JSON = "videolist/medialist.json"
 
 
 class VideoRepository(private val context: Context) : VideoImplementation {
@@ -18,10 +18,11 @@ class VideoRepository(private val context: Context) : VideoImplementation {
 
     override fun createVideoEntityList(videoEntity: VideoEntity) {
         videoList.add(videoEntity)
+        Log.d("@@@", "createVideoEntityList: " + videoList.indexOf(videoEntity))
+
     }
 
     override fun getListVideo(): List<VideoEntity> {
-
         loadVideoFilesFromAssetsFolder()
         return videoList
     }
@@ -50,7 +51,7 @@ class VideoRepository(private val context: Context) : VideoImplementation {
             json = context.assets.open(NAME_FILE_JSON).bufferedReader().use {
                 it.readText()
             }
-            Log.d("@@@", "readJson: $json")
+            Log.d("@@@", "VideoRepository readJson: $json")
         } catch (e: Exception) {
             Log.d("@@@", "readJson Error: $e")
         }

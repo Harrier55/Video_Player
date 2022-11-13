@@ -22,7 +22,7 @@ private const val TAG = "@@@"
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var surfaceViewHolder: SurfaceHolder
-    private var mediaPlayer: MediaPlayer = MediaPlayer()
+    private lateinit var mediaPlayer: MediaPlayer
     private val viewModel: MainActivityViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         requestRuntimePermission()
         initViewHolder()
         initBottomClick()
-        viewModel.startVideo()
 
         viewModel.videoContent.observe(this) { videoEntity ->
             playerStart(videoEntity)
@@ -42,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.reportDataBaseList.observe(this){
             binding.listDBTextView.text = it.toString()
         }
+
+        viewModel.startVideo()
     }
 
     private fun playerStart(videoEntity: VideoEntity) {
@@ -49,9 +50,10 @@ class MainActivity : AppCompatActivity() {
         val part = videoEntity.videoIdentifier
 
         try {
-            mediaPlayer = MediaPlayer.create(this, Uri.parse(part))
+            val part1 = "content://com.example.videoplayer/video_8.mp4"
+            mediaPlayer = MediaPlayer.create(this, Uri.parse(part1))
         } catch (e: IOException) {
-            Log.d(TAG, "Error: $e")
+            Log.d(TAG, "playerStart Error: $e")
         }
 
         mediaPlayer.setOnPreparedListener {
