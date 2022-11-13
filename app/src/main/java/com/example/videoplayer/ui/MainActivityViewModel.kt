@@ -29,7 +29,6 @@ class MainActivityViewModel(
         } else if (index == listSize - 1) {
             index = 0
         }
-        Log.d("@@@", "startVideo index = :" + index)
         val videoEntity = list[index]
         videoContent.postValue(videoEntity)
         writeToDataBase(videoEntity)
